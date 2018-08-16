@@ -13,5 +13,5 @@ public @interface Null {
 	/**
 	 * 字段名称
 	 */
-	String value();
+	String value() default "";
 }

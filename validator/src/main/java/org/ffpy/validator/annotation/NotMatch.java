@@ -15,7 +15,7 @@ public @interface NotMatch {
 	/**
 	 * 字段名称
 	 */
-	String value();
+	String value() default "";
 
 	/**
 	 * 不能匹配的正则表达式

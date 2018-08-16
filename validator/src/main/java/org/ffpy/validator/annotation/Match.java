@@ -15,7 +15,7 @@ public @interface Match {
 	/**
 	 * 字段名称
 	 */
-	String value();
+	String value() default "";
 
 	/**
 	 * 匹配的正则表达式

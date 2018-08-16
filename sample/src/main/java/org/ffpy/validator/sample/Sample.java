@@ -2,6 +2,8 @@ package org.ffpy.validator.sample;
 
 import org.ffpy.validator.Validator;
 import org.ffpy.validator.exception.ValidateException;
+import org.ffpy.validator.exception.ValidateMatchException;
+import org.ffpy.validator.exception.ValidateNotEmptyException;
 
 public class Sample {
 
@@ -18,6 +20,10 @@ public class Sample {
 		try {
 			Validator.validate(person);
 			System.out.println("校验通过");
+		} catch (ValidateNotEmptyException e) {
+			System.out.println(e.getName() + "NotNull校验不通过");
+		} catch (ValidateMatchException e) {
+			System.out.println(e.getName() + "Match校验不通过");
 		} catch (ValidateException e) {
 			System.out.println(e.getMessage());
 		}
@@ -30,6 +36,10 @@ public class Sample {
 		try {
 			Validator.validate(person);
 			System.out.println("校验通过");
+		} catch (ValidateNotEmptyException e) {
+			System.out.println(e.getName() + "NotNull校验不通过");
+		} catch (ValidateMatchException e) {
+			System.out.println(e.getName() + "Match校验不通过");
 		} catch (ValidateException e) {
 			System.out.println(e.getMessage());
 		}
@@ -43,6 +53,10 @@ public class Sample {
 		try {
 			Validator.validate(person);
 			System.out.println("校验通过");
+		} catch (ValidateNotEmptyException e) {
+			System.out.println(e.getName() + "NotNull校验不通过");
+		} catch (ValidateMatchException e) {
+			System.out.println(e.getName() + "Match校验不通过");
 		} catch (ValidateException e) {
 			System.out.println(e.getMessage());
 		}
@@ -56,6 +70,10 @@ public class Sample {
 		try {
 			Validator.validate(person);
 			System.out.println("校验通过");
+		} catch (ValidateNotEmptyException e) {
+			System.out.println(e.getName() + "NotNull校验不通过");
+		} catch (ValidateMatchException e) {
+			System.out.println(e.getName() + "Match校验不通过");
 		} catch (ValidateException e) {
 			System.out.println(e.getMessage());
 		}

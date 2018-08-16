@@ -36,24 +36,25 @@ public class FieldData {
 	 * @return 字段名称
 	 */
 	private String initName(Field field) {
-		String name = null;
+		String name = "";
 		if (hasNullAnnotation())
 			name = getNullAnnotation(field).value();
-		if (name == null && hasNotNullAnnotation())
+		if (StringUtils.isEmpty(name) && hasNotNullAnnotation())
 			name = getNotNullAnnotation(field).value();
-		if (name == null && hasEmptyAnnotation())
+		if (StringUtils.isEmpty(name) && hasEmptyAnnotation())
 			name = getEmptyAnnotation(field).value();
-		if (name == null && hasNotEmptyAnnotation())
+		if (StringUtils.isEmpty(name) && hasNotEmptyAnnotation())
 			name = getNotEmptyAnnotation(field).value();
-		if (name == null && hasMatchAnnotation())
+		if (StringUtils.isEmpty(name) && hasMatchAnnotation())
 			name = getMatchAnnotation(field).value();
-		if (name == null && hasNotMatchAnnotation())
+		if (StringUtils.isEmpty(name) && hasNotMatchAnnotation())
 			name = getNotMatchAnnotation(field).value();
-		if (name == null && hasRangeAnnotation())
+		if (StringUtils.isEmpty(name) && hasRangeAnnotation())
 			name = getRangeAnnotation(field).value();
-		if (name == null && hasNotRangeAnnotation())
+		if (StringUtils.isEmpty(name) && hasNotRangeAnnotation())
 			name = getNotRangeAnnotation(field).value();
-		if (name == null)
+		// 校验注解上没有设置，设置默认值
+		if (StringUtils.isEmpty(name))
 			name = field.getName();
 		return name;
 	}

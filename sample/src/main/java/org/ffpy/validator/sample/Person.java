@@ -8,7 +8,7 @@ public class Person {
 	@NotEmpty("名字")
 	private String name;
 	@NotEmpty("手机号")
-	@Match(value = "手机号", pattern = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$")
+	@Match(pattern = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$")
 	private String phone;
 
 	public String getId() {
