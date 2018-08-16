@@ -13,11 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * 校验字段数据管理类
  */
 public class FileDataManager {
-	// 用于缓存的Map
+	/** 用于缓存的Map */
 	private static final Map<Field, FieldData> cache = new ConcurrentHashMap<>();
 
 	/**
-	 * 获取字段的数据
+	 * 获取字段的数据。
 	 *
 	 * @param field 处理的字段
 	 * @return 字段的数据
@@ -32,7 +32,7 @@ public class FileDataManager {
 	}
 
 	/**
-	 * 获取字段的校验注解枚举集合
+	 * 获取字段的校验注解枚举集合。
 	 *
 	 * @param field 处理的字段
 	 * @return 字段上的校验注解枚举集合

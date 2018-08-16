@@ -10,11 +10,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * 校验字段管理类
  */
 public class FieldManager {
-	// 用于缓存的Map
+	/** 用于缓存的Map */
 	private static final Map<Class<?>, List<Field>> cache = new ConcurrentHashMap<>();
 
 	/**
-	 * 获取类上带有校验注解的字段列表，使用缓存
+	 * 获取类上带有校验注解的字段列表，使用缓存。
 	 *
 	 * @param cls 处理的类
 	 * @return 带有校验注解的字段列表
@@ -29,7 +29,7 @@ public class FieldManager {
 	}
 
 	/**
-	 * 获取带有校验注解的字段，不使用缓存
+	 * 获取带有校验注解的字段，不使用缓存。
 	 *
 	 * @param cls 处理的类
 	 * @return 带有校验注解的字段列表
@@ -46,7 +46,7 @@ public class FieldManager {
 	}
 
 	/**
-	 * 判断字段是否有校验注解
+	 * 判断字段是否有校验注解。
 	 *
 	 * @param field 处理的字段
 	 * @return 有则返回true，没有返回false

@@ -9,13 +9,15 @@ import java.util.Map;
 class ObjectUtils {
 
 	/**
-	 * 判断对象是否为空
-	 * 适用于以下情况：
-	 * 1. Object == null
-	 * 2. String.isEmpty()
-	 * 3. T[].length == 0
-	 * 4. Collection.isEmpty()
-	 * 5. Map.isEmpty()
+	 * 判断对象是否为空。
+	 * <p>适用于以下情况：
+	 * <ol>
+	 *     <li>Object == null</li>
+	 *     <li>String.isEmpty()</li>
+	 *     <li>T[].length == 0</li>
+	 *     <li>Collection.isEmpty()</li>
+	 *     <li>Map.isEmpty()</li>
+	 * </ol>
 	 *
 	 * @param obj 要判断的对象
 	 * @return 空返回true，非空返回false
@@ -53,13 +55,15 @@ class ObjectUtils {
 	}
 
 	/**
-	 * 判断对象是否为非空
-	 * 适用于以下情况：
-	 * 1. Object != null
-	 * 2. !String.isEmpty()
-	 * 3. T[].length != 0
-	 * 4. !Collection.isEmpty()
-	 * 5. !Map.isEmpty()
+	 * 判断对象是否为非空。
+	 * <p>适用于以下情况：
+	 * <ol>
+	 *     <li>Object != null</li>
+	 *     <li>!String.isEmpty()</li>
+	 *     <li>T[].length != 0</li>
+	 *     <li>!Collection.isEmpty()</li>
+	 *     <li>!Map.isEmpty()</li>
+	 * </ol>
 	 *
 	 * @param obj 要判断的对象
 	 * @return 非空返回true，空返回false
@@ -69,9 +73,9 @@ class ObjectUtils {
 	}
 
 	/**
-	 * 判断对象是否匹配指定的正则表达式
-	 * 如果obj为null或者obj.toString()的返回值为null，匹配失败
-	 * 否则判断obj.toString()的返回值是否匹配指定的正则表达式
+	 * 判断对象是否匹配指定的正则表达式。
+	 * <p>如果obj为null或者obj.toString()的返回值为null，匹配失败。
+	 * <p>否则判断obj.toString()的返回值是否匹配指定的正则表达式。
 	 *
 	 * @param obj     要判断的对象
 	 * @param pattern 匹配的正则表达式
@@ -84,9 +88,9 @@ class ObjectUtils {
 	}
 
 	/**
-	 * 判断对象是否不匹配指定的正则表达式
-	 * 如果obj为null或者obj.toString()的返回值为null，匹配失败
-	 * 否则判断obj.toString()的返回值是否匹配指定的正则表达式
+	 * 判断对象是否不匹配指定的正则表达式。
+	 * <p>如果obj为null或者obj.toString()的返回值为null，匹配失败。
+	 * <p>否则判断obj.toString()的返回值是否匹配指定的正则表达式。
 	 *
 	 * @param obj     要判断的对象
 	 * @param pattern 不能匹配的正则表达式
@@ -97,15 +101,17 @@ class ObjectUtils {
 	}
 
 	/**
-	 * 判断对象的值是否在指定范围内[min, max]，包括min和max
-	 * 只适用于以下字段类型：
-	 * 1. byte、Byte
-	 * 2. short、Short
-	 * 3. int、Integer
-	 * 4. long、Long
-	 * 5. float、Float
-	 * 6. double、Double
-	 * 如果是其他的类型则会抛出异常
+	 * 判断对象的值是否在指定范围内[min, max]，包括min和max。
+	 * <p>只适用于以下字段类型：
+	 * <ol>
+	 *     <li>byte、Byte</li>
+	 *     <li>short、Short</li>
+	 *     <li>int、Integer</li>
+	 *     <li>long、Long</li>
+	 *     <li>float、Float</li>
+	 *     <li>double、Double</li>
+	 * </ol>
+	 * <p>如果是其他的类型则会抛出异常。
 	 *
 	 * @param value 要判断的对象
 	 * @param min   最小值
@@ -142,15 +148,17 @@ class ObjectUtils {
 	}
 
 	/**
-	 * 判断对象的值是否不在指定范围内[min, max]，包括min和max
-	 * 只适用于以下字段类型：
-	 * 1. byte、Byte
-	 * 2. short、Short
-	 * 3. int、Integer
-	 * 4. long、Long
-	 * 5. float、Float
-	 * 6. double、Double
-	 * 如果是其他的类型则会抛出异常
+	 * 判断对象的值是否不在指定范围内[min, max]，包括min和max。
+	 * <p>只适用于以下字段类型：
+	 * <ol>
+	 *     <li>byte、Byte</li>
+	 *     <li>short、Short</li>
+	 *     <li>int、Integer</li>
+	 *     <li>long、Long</li>
+	 *     <li>float、Float</li>
+	 *     <li>double、Double</li>
+	 * </ol>
+	 * <p>如果是其他的类型则会抛出异常。
 	 *
 	 * @param value 要判断的对象
 	 * @param min   最小值

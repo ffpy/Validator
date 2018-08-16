@@ -8,19 +8,19 @@ import java.util.Objects;
  * 校验失败的提示信息的建造者
  */
 class MessageBuilder {
-	// 字段名
+	/** 字段名 */
 	private String field;
-	// 字段名称
+	/** 字段名称 */
 	private String name;
-	// (不能)匹配的正则表达式
+	/** (不能)匹配的正则表达式 */
 	private String pattern;
-	// 最小值
+	/** 最小值 */
 	private Double min;
-	// 最大值
+	/** 最大值 */
 	private Double max;
 
 	/**
-	 * 根据指定信息创建一个MessageBuilder实例的静态工厂方法
+	 * 根据指定信息创建一个MessageBuilder实例的静态工厂方法。
 	 *
 	 * @param fieldData 字段数据
 	 * @return 对应信息的MessageBuilder实例
@@ -33,7 +33,7 @@ class MessageBuilder {
 	}
 
 	/**
-	 * 设置${pattern}变量的值
+	 * 设置${pattern}变量的值。
 	 *
 	 * @param pattern (不能)匹配的正则表达式
 	 * @return this
@@ -44,7 +44,7 @@ class MessageBuilder {
 	}
 
 	/**
-	 * 设置${min}变量的值
+	 * 设置${min}变量的值。
 	 *
 	 * @param min 最小值
 	 * @return this
@@ -55,7 +55,7 @@ class MessageBuilder {
 	}
 
 	/**
-	 * 设置${max}变量的值
+	 * 设置${max}变量的值。
 	 *
 	 * @param max 最大值
 	 * @return this
@@ -66,7 +66,7 @@ class MessageBuilder {
 	}
 
 	/**
-	 * 建造校验失败的提醒信息
+	 * 建造校验失败的提醒信息。
 	 *
 	 * @param template 信息模板
 	 * @return 校验失败的提醒信息
@@ -87,8 +87,8 @@ class MessageBuilder {
 	}
 
 	/**
-	 * 浮点数转字符串形式，把字符串末尾的".0"去掉
-	 * 例如把"1.0"改为"1"
+	 * 浮点数转字符串形式，把字符串末尾的".0"去掉。
+	 * <p>例如把"1.0"改为"1"。
 	 *
 	 * @param d 要转换的浮点数
 	 * @return 浮点数的字符串形式

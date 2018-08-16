@@ -3,9 +3,9 @@ package org.ffpy.validator.annotation;
 import java.lang.annotation.*;
 
 /**
- * 表示字段必须匹配指定正则表达式
- * 如果字段的值为null或者字段的toString()的返回值为null，匹配失败
- * 否则，会调用字段的toString()方法，然后进行匹配
+ * 表示字段必须匹配指定正则表达式。
+ * <p>如果字段的值为null或者字段的toString()的返回值为null，匹配失败。
+ * <p>否则，会调用字段的toString()方法，然后进行匹配。
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -13,12 +13,16 @@ import java.lang.annotation.*;
 public @interface Match {
 
 	/**
-	 * 字段名称
+	 * 字段名称。
+	 *
+	 * @return 字段名称
 	 */
 	String value() default "";
 
 	/**
-	 * 匹配的正则表达式
+	 * 匹配的正则表达式。
+	 *
+	 * @return 匹配的正则表达式
 	 */
 	String pattern();
 }

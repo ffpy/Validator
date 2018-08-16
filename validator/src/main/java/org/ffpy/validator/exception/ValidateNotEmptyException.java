@@ -6,8 +6,6 @@ package org.ffpy.validator.exception;
 public class ValidateNotEmptyException extends ValidateException {
 
 	/**
-	 * 构造器
-	 *
 	 * @param field   字段名
 	 * @param name    字段名称
 	 * @param value   字段值

@@ -13,7 +13,7 @@ import java.util.Objects;
 class FieldUtils {
 
 	/**
-	 * 获取指定对象的所有带校验注解的字段
+	 * 获取指定对象的所有带校验注解的字段。
 	 *
 	 * @param obj                                   处理的对象
 	 * @param onListValidateAnnotationFieldListener 获取字段的回调接口
@@ -49,7 +49,7 @@ class FieldUtils {
 	 */
 	interface OnListValidateAnnotationFieldListener {
 		/**
-		 * 回调函数
+		 * 回调函数。
 		 *
 		 * @param value 字段值
 		 * @param field 字段

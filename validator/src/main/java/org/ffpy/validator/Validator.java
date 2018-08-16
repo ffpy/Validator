@@ -13,28 +13,49 @@ import java.lang.reflect.Field;
 public class Validator {
 
 	/**
-	 * 校验Bean
-	 * 校验Bean上的以下注解：
-	 * 1. {@link Null}
-	 * 2. {@link NotNull}
-	 * 3. {@link Empty}
-	 * 4. {@link NotEmpty}
-	 * 5. {@link Match}
-	 * 6. {@link NotMatch}
-	 * 7. {@link Range}
-	 * 8. {@link NotRange}
-	 * 校验失败则抛出对应的异常：
-	 * 1. {@link ValidateNullException}
-	 * 2. {@link ValidateNotNullException}
-	 * 3. {@link ValidateEmptyException}
-	 * 4. {@link ValidateNotEmptyException}
-	 * 5. {@link ValidateMatchException}
-	 * 6. {@link ValidateNotMatchException}
-	 * 7. {@link ValidateRangeException}
-	 * 8. {@link ValidateNotRangeException}
+	 * 校验Bean上带校验注解的字段，校验失败则抛出对应的异常。
+	 * <table>
+	 *     <caption>校验注解与异常</caption>
+	 *     <tr>
+	 *         <th>校验注解</th>
+	 *         <th>抛出的异常</th>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link Null}</td>
+	 *         <td>{@link ValidateNullException}</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link NotNull}</td>
+	 *         <td>{@link ValidateNotNullException}</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link Empty}</td>
+	 *         <td>{@link ValidateEmptyException}</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link NotEmpty}</td>
+	 *         <td>{@link ValidateNotEmptyException}</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link Match}</td>
+	 *         <td>{@link ValidateMatchException}</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link NotMatch}</td>
+	 *         <td>{@link ValidateNotMatchException}</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link Range}</td>
+	 *         <td>{@link ValidateRangeException}</td>
+	 *     </tr>
+	 *     <tr>
+	 *         <td>{@link NotRange}</td>
+	 *         <td>{@link ValidateNotRangeException}</td>
+	 *     </tr>
+	 * </table>
 	 *
 	 * @param bean 要校验的Bean
-	 * @throws ValidateException 校验失败或出错
+	 * @throws ValidateException 校验失败
 	 */
 	public static void validate(Object bean) throws ValidateException {
 		FieldUtils.listWithValidateAnnotationFields(bean, (value, field) -> {
@@ -61,7 +82,7 @@ public class Validator {
 	}
 
 	/**
-	 * 校验为Null
+	 * 校验为Null。
 	 *
 	 * @param value     字段值
 	 * @param fieldData 字段数据
@@ -76,7 +97,7 @@ public class Validator {
 	}
 
 	/**
-	 * 校验不为Null
+	 * 校验不为Null。
 	 *
 	 * @param value     字段值
 	 * @param fieldData 字段数据
@@ -91,9 +112,9 @@ public class Validator {
 	}
 
 	/**
-	 * 校验为空
+	 * 校验为空。
 	 *
-	 * @param value 字段值
+	 * @param value     字段值
 	 * @param fieldData 字段数据
 	 * @throws ValidateEmptyException 校验{@link Empty}失败
 	 */
@@ -106,9 +127,9 @@ public class Validator {
 	}
 
 	/**
-	 * 校验不为空
+	 * 校验不为空。
 	 *
-	 * @param value 字段值
+	 * @param value     字段值
 	 * @param fieldData 字段数据
 	 * @throws ValidateNotEmptyException 校验{@link NotEmpty}失败
 	 */
@@ -121,11 +142,11 @@ public class Validator {
 	}
 
 	/**
-	 * 校验匹配正则表达式
+	 * 校验匹配正则表达式。
 	 *
-	 * @param value 字段值
-	 * @param fieldData  字段数据
-	 * @param field 字段
+	 * @param value     字段值
+	 * @param fieldData 字段数据
+	 * @param field     字段
 	 * @throws ValidateMatchException 校验{@link Match}失败
 	 */
 	private static void validateMatch(
@@ -141,11 +162,11 @@ public class Validator {
 	}
 
 	/**
-	 * 校验不匹配正则表达式
+	 * 校验不匹配正则表达式。
 	 *
-	 * @param value 字段值
+	 * @param value     字段值
 	 * @param fieldData 字段数据
-	 * @param field 字段
+	 * @param field     字段
 	 * @throws ValidateNotMatchException 校验{@link NotMatch}失败
 	 */
 	private static void validateNotMatch(
@@ -161,11 +182,11 @@ public class Validator {
 	}
 
 	/**
-	 * 校验数值在范围内
+	 * 校验数值在范围内。
 	 *
-	 * @param value 字段值
+	 * @param value     字段值
 	 * @param fieldData 字段数据
-	 * @param field 字段
+	 * @param field     字段
 	 * @throws ValidateRangeException 校验{@link Range}失败
 	 */
 	private static void validateRange(
@@ -181,11 +202,11 @@ public class Validator {
 	}
 
 	/**
-	 * 校验数值不在范围内
+	 * 校验数值不在范围内。
 	 *
-	 * @param value 字段值
-	 * @param fieldData  字段数据
-	 * @param field 字段
+	 * @param value     字段值
+	 * @param fieldData 字段数据
+	 * @param field     字段
 	 * @throws ValidateNotRangeException 校验{@link NotRange}失败
 	 */
 	private static void validateNotRange(

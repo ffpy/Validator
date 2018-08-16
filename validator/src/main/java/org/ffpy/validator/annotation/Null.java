@@ -3,7 +3,7 @@ package org.ffpy.validator.annotation;
 import java.lang.annotation.*;
 
 /**
- * 表示字段必须为null
+ * 表示字段必须为null。
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -11,7 +11,9 @@ import java.lang.annotation.*;
 public @interface Null {
 
 	/**
-	 * 字段名称
+	 * 字段名称。
+	 *
+	 * @return 字段名称
 	 */
 	String value() default "";
 }
