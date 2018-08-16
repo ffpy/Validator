@@ -1,7 +1,5 @@
 package org.ffpy.validator.exception;
 
-import java.lang.reflect.Field;
-
 /**
  * 校验@Match注解失败时抛出的异常
  */
@@ -19,7 +17,7 @@ public class ValidateMatchException extends ValidateException {
 	 * @param message 校验失败时的提示信息
 	 */
 	public ValidateMatchException(
-			Field field, String name, Object value, String pattern, String message) {
+			String field, String name, Object value, String pattern, String message) {
 		super(field, name, value, message);
 		this.pattern = pattern;
 	}

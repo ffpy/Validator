@@ -2,7 +2,6 @@ package org.ffpy.validator.exception;
 
 import com.sun.istack.internal.Nullable;
 
-import java.lang.reflect.Field;
 import java.util.Objects;
 
 /**
@@ -26,8 +25,8 @@ public abstract class ValidateException extends Exception {
 	 * @param value   字段值
 	 * @param message 校验失败的提示消息
 	 */
-	ValidateException(Field field, String name, @Nullable Object value, String message) {
-		this.field = Objects.requireNonNull(field).getName();
+	ValidateException(String field, String name, @Nullable Object value, String message) {
+		this.field = field;
 		this.name = Objects.requireNonNull(name);
 		this.value = value;
 		this.message = Objects.requireNonNull(message);

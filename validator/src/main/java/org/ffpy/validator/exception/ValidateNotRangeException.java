@@ -1,7 +1,5 @@
 package org.ffpy.validator.exception;
 
-import java.lang.reflect.Field;
-
 /**
  * 校验@NotRange注解失败时抛出的异常
  */
@@ -22,7 +20,7 @@ public class ValidateNotRangeException extends ValidateException {
 	 * @param max     最大值
 	 */
 	public ValidateNotRangeException(
-			Field field, String name, Object value, String message, double min, double max) {
+			String field, String name, Object value, String message, double min, double max) {
 		super(field, name, value, message);
 		this.min = min;
 		this.max = max;

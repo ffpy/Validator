@@ -1,5 +1,6 @@
-package org.ffpy.validator.cache;
+package org.ffpy.validator.manager;
 
+import org.ffpy.validator.FieldData;
 import org.ffpy.validator.annotation.*;
 import org.ffpy.validator.constant.AnnotationEnum;
 
@@ -9,34 +10,34 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 校验注解缓存类
+ * 校验字段数据管理类
  */
-public class AnnotationCache {
+public class FileDataManager {
 	// 用于缓存的Map
-	private static final Map<Field, EnumSet<AnnotationEnum>> cache = new ConcurrentHashMap<>();
+	private static final Map<Field, FieldData> cache = new ConcurrentHashMap<>();
 
 	/**
-	 * 获取字段的校验注解枚举集合，使用缓存
+	 * 获取字段的数据
 	 *
 	 * @param field 处理的字段
-	 * @return 字段上的校验注解枚举集合
+	 * @return 字段的数据
 	 */
-	public static EnumSet<AnnotationEnum> getFieldAnnotationEnums(Field field) {
-		EnumSet<AnnotationEnum> annotationEnums = cache.get(field);
-		if (annotationEnums == null) {
-			annotationEnums = getFieldAnnotationEnumsWithoutCache(field);
-			cache.put(field, annotationEnums);
+	public static FieldData getFieldData(Field field) {
+		FieldData fieldData = cache.get(field);
+		if (fieldData == null) {
+			fieldData = new FieldData(field, getFieldAnnotationEnums(field));
+			cache.put(field, fieldData);
 		}
-		return annotationEnums;
+		return fieldData;
 	}
 
 	/**
-	 * 获取字段的校验注解枚举集合，不使用缓存
+	 * 获取字段的校验注解枚举集合
 	 *
 	 * @param field 处理的字段
 	 * @return 字段上的校验注解枚举集合
 	 */
-	private static EnumSet<AnnotationEnum> getFieldAnnotationEnumsWithoutCache(Field field) {
+	private static EnumSet<AnnotationEnum> getFieldAnnotationEnums(Field field) {
 		EnumSet<AnnotationEnum> annotationEnums = EnumSet.noneOf(AnnotationEnum.class);
 		if (field.getAnnotation(Null.class) != null)
 			annotationEnums.add(AnnotationEnum.NULL);

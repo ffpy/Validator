@@ -1,4 +1,4 @@
-package org.ffpy.validator.cache;
+package org.ffpy.validator.manager;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 字段缓存类
+ * 校验字段管理类
  */
-public class FieldCache {
+public class FieldManager {
 	// 用于缓存的Map
 	private static final Map<Class<?>, List<Field>> cache = new ConcurrentHashMap<>();
 
@@ -52,10 +52,10 @@ public class FieldCache {
 	 * @return 有则返回true，没有返回false
 	 */
 	private static boolean hasValidateAnnotation(Field field) {
-		return !AnnotationCache.getFieldAnnotationEnums(field).isEmpty();
+		return FileDataManager.getFieldData(field).hasValidateAnnotations();
 	}
 
-	private FieldCache() {
+	private FieldManager() {
 		throw new AssertionError();
 	}
 }

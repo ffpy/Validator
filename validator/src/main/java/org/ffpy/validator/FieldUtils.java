@@ -1,6 +1,6 @@
 package org.ffpy.validator;
 
-import org.ffpy.validator.cache.FieldCache;
+import org.ffpy.validator.manager.FieldManager;
 import org.ffpy.validator.exception.ValidateException;
 
 import java.lang.reflect.Field;
@@ -26,7 +26,7 @@ class FieldUtils {
 
 		// 获取对象的所有带校验注解的字段
 		Class<?> cls = obj.getClass();
-		List<Field> fields = FieldCache.getHasValidateAnnotationFields(cls);
+		List<Field> fields = FieldManager.getHasValidateAnnotationFields(cls);
 
 		for (Field field : fields) {
 			// 设置访问权限

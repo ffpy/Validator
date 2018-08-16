@@ -2,7 +2,6 @@ package org.ffpy.validator;
 
 import org.ffpy.validator.constant.MessageVariable;
 
-import java.lang.reflect.Field;
 import java.util.Objects;
 
 /**
@@ -23,14 +22,13 @@ class MessageBuilder {
 	/**
 	 * 根据指定信息创建一个MessageBuilder实例的静态工厂方法
 	 *
-	 * @param field 字段
-	 * @param name  字段名称
+	 * @param fieldData 字段数据
 	 * @return 对应信息的MessageBuilder实例
 	 */
-	public static MessageBuilder of(Field field, String name) {
+	public static MessageBuilder of(FieldData fieldData) {
 		MessageBuilder builder = new MessageBuilder();
-		builder.field = Objects.requireNonNull(field).getName();
-		builder.name = Objects.requireNonNull(name);
+		builder.field = fieldData.getField();
+		builder.name = fieldData.getName();
 		return builder;
 	}
 

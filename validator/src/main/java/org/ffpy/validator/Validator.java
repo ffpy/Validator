@@ -1,13 +1,11 @@
 package org.ffpy.validator;
 
 import org.ffpy.validator.annotation.*;
-import org.ffpy.validator.cache.AnnotationCache;
-import org.ffpy.validator.constant.AnnotationEnum;
+import org.ffpy.validator.manager.FileDataManager;
 import org.ffpy.validator.constant.MessageTemplate;
 import org.ffpy.validator.exception.*;
 
 import java.lang.reflect.Field;
-import java.util.EnumSet;
 
 /**
  * 校验器
@@ -40,64 +38,55 @@ public class Validator {
 	 */
 	public static void validate(Object bean) throws ValidateException {
 		FieldUtils.listWithValidateAnnotationFields(bean, (value, field) -> {
-			// 获取字段上的校验注解枚举集合
-			EnumSet<AnnotationEnum> annotationEnumEnumSet =
-					AnnotationCache.getFieldAnnotationEnums(field);
-			if (annotationEnumEnumSet == null) return;
+			FieldData fieldData = FileDataManager.getFieldData(field);
+			if (fieldData == null || !fieldData.hasValidateAnnotations()) return;
 
-			// 如果字段上有指定的校验注解，就校验
-			if (annotationEnumEnumSet.contains(AnnotationEnum.NULL))
-				validateNull(value, field);
-			if (annotationEnumEnumSet.contains(AnnotationEnum.NOT_NULL))
-				validateNotNull(value, field);
-			if (annotationEnumEnumSet.contains(AnnotationEnum.EMPTY))
-				validateEmpty(value, field);
-			if (annotationEnumEnumSet.contains(AnnotationEnum.NOT_EMPTY))
-				validateNotEmpty(value, field);
-			if (annotationEnumEnumSet.contains(AnnotationEnum.MATCH))
-				validateMatch(value, field);
-			if (annotationEnumEnumSet.contains(AnnotationEnum.NOT_MATCH))
-				validateNotMatch(value, field);
-			if (annotationEnumEnumSet.contains(AnnotationEnum.RANGE))
-				validateRange(value, field);
-			if (annotationEnumEnumSet.contains(AnnotationEnum.NOT_RANGE))
-				validateNotRange(value, field);
+			if (fieldData.hasNullAnnotation())
+				validateNull(value, fieldData);
+			if (fieldData.hasNotNullAnnotation())
+				validateNotNull(value, fieldData);
+			if (fieldData.hasEmptyAnnotation())
+				validateEmpty(value, fieldData);
+			if (fieldData.hasNotEmptyAnnotation())
+				validateNotEmpty(value, fieldData);
+			if (fieldData.hasMatchAnnotation())
+				validateMatch(value, fieldData, field);
+			if (fieldData.hasNotMatchAnnotation())
+				validateNotMatch(value, fieldData, field);
+			if (fieldData.hasRangeAnnotation())
+				validateRange(value, fieldData, field);
+			if (fieldData.hasNotRangeAnnotation())
+				validateNotRange(value, fieldData, field);
 		});
 	}
 
 	/**
 	 * 校验为Null
 	 *
-	 * @param value 字段值
-	 * @param field 字段
+	 * @param value     字段值
+	 * @param fieldData 字段数据
 	 * @throws ValidateNullException 校验{@link Null}失败
 	 */
 	private static void validateNull(
-			Object value, Field field) throws ValidateNullException {
-		Null att = field.getAnnotation(Null.class);
-		if (att == null) return;
+			Object value, FieldData fieldData) throws ValidateNullException {
 		if (value != null) {
-			String message = MessageBuilder.of(field, att.value())
-					.build(MessageTemplate.NULL);
-			throw new ValidateNullException(field, att.value(), value, message);
+			String message = MessageBuilder.of(fieldData).build(MessageTemplate.NULL);
+			throw new ValidateNullException(fieldData.getField(), fieldData.getName(), value, message);
 		}
 	}
 
 	/**
 	 * 校验不为Null
 	 *
-	 * @param value 字段值
-	 * @param field 字段
+	 * @param value     字段值
+	 * @param fieldData 字段数据
 	 * @throws ValidateNotNullException 校验{@link NotNull}失败
 	 */
 	private static void validateNotNull(
-			Object value, Field field) throws ValidateNotNullException {
-		NotNull att = field.getAnnotation(NotNull.class);
-		if (att == null) return;
+			Object value, FieldData fieldData) throws ValidateNotNullException {
 		if (value == null) {
-			String message = MessageBuilder.of(field, att.value())
-					.build(MessageTemplate.NOT_NULL);
-			throw new ValidateNotNullException(field, att.value(), value, message);
+			String message = MessageBuilder.of(fieldData).build(MessageTemplate.NOT_NULL);
+			throw new ValidateNotNullException(fieldData.getField(), fieldData.getName(), value, message);
 		}
 	}
 
@@ -105,17 +94,14 @@ public class Validator {
 	 * 校验为空
 	 *
 	 * @param value 字段值
-	 * @param field 字段
+	 * @param fieldData 字段数据
 	 * @throws ValidateEmptyException 校验{@link Empty}失败
 	 */
 	private static void validateEmpty(
-			Object value, Field field) throws ValidateEmptyException {
-		Empty att = field.getAnnotation(Empty.class);
-		if (att == null) return;
+			Object value, FieldData fieldData) throws ValidateEmptyException {
 		if (ObjectUtils.isNotEmpty(value)) {
-			String message = MessageBuilder.of(field, att.value())
-					.build(MessageTemplate.EMPTY);
-			throw new ValidateEmptyException(field, att.value(), value, message);
+			String message = MessageBuilder.of(fieldData).build(MessageTemplate.EMPTY);
+			throw new ValidateEmptyException(fieldData.getField(), fieldData.getName(), value, message);
 		}
 	}
 
@@ -123,17 +109,14 @@ public class Validator {
 	 * 校验不为空
 	 *
 	 * @param value 字段值
-	 * @param field 字段
+	 * @param fieldData 字段数据
 	 * @throws ValidateNotEmptyException 校验{@link NotEmpty}失败
 	 */
 	private static void validateNotEmpty(
-			Object value, Field field) throws ValidateNotEmptyException {
-		NotEmpty att = field.getAnnotation(NotEmpty.class);
-		if (att == null) return;
+			Object value, FieldData fieldData) throws ValidateNotEmptyException {
 		if (ObjectUtils.isEmpty(value)) {
-			String message = MessageBuilder.of(field, att.value())
-					.build(MessageTemplate.NOT_EMPTY);
-			throw new ValidateNotEmptyException(field, att.value(), value, message);
+			String message = MessageBuilder.of(fieldData).build(MessageTemplate.NOT_EMPTY);
+			throw new ValidateNotEmptyException(fieldData.getField(), fieldData.getName(), value, message);
 		}
 	}
 
@@ -141,18 +124,19 @@ public class Validator {
 	 * 校验匹配正则表达式
 	 *
 	 * @param value 字段值
+	 * @param fieldData  字段数据
 	 * @param field 字段
 	 * @throws ValidateMatchException 校验{@link Match}失败
 	 */
 	private static void validateMatch(
-			Object value, Field field) throws ValidateMatchException {
-		Match att = field.getAnnotation(Match.class);
-		if (att == null) return;
+			Object value, FieldData fieldData, Field field) throws ValidateMatchException {
+		Match att = fieldData.getMatchAnnotation(field);
 		if (ObjectUtils.isNotMatch(value, att.pattern())) {
-			String message = MessageBuilder.of(field, att.value())
+			String message = MessageBuilder.of(fieldData)
 					.pattern(att.pattern())
 					.build(MessageTemplate.MATCH);
-			throw new ValidateMatchException(field, att.value(), value, att.pattern(), message);
+			throw new ValidateMatchException(fieldData.getField(), fieldData.getName(),
+					value, att.pattern(), message);
 		}
 	}
 
@@ -160,18 +144,19 @@ public class Validator {
 	 * 校验不匹配正则表达式
 	 *
 	 * @param value 字段值
+	 * @param fieldData 字段数据
 	 * @param field 字段
 	 * @throws ValidateNotMatchException 校验{@link NotMatch}失败
 	 */
 	private static void validateNotMatch(
-			Object value, Field field) throws ValidateNotMatchException {
-		NotMatch att = field.getAnnotation(NotMatch.class);
-		if (att == null) return;
+			Object value, FieldData fieldData, Field field) throws ValidateNotMatchException {
+		NotMatch att = fieldData.getNotMatchAnnotation(field);
 		if (ObjectUtils.isMatch(value, att.pattern())) {
-			String message = MessageBuilder.of(field, att.value())
+			String message = MessageBuilder.of(fieldData)
 					.pattern(att.pattern())
 					.build(MessageTemplate.NOT_MATCH);
-			throw new ValidateNotMatchException(field, att.value(), value, att.pattern(), message);
+			throw new ValidateNotMatchException(fieldData.getField(), fieldData.getName(),
+					value, att.pattern(), message);
 		}
 	}
 
@@ -179,19 +164,19 @@ public class Validator {
 	 * 校验数值在范围内
 	 *
 	 * @param value 字段值
+	 * @param fieldData 字段数据
 	 * @param field 字段
 	 * @throws ValidateRangeException 校验{@link Range}失败
 	 */
 	private static void validateRange(
-			Object value, Field field) throws ValidateRangeException {
-		Range att = field.getAnnotation(Range.class);
-		if (att == null) return;
+			Object value, FieldData fieldData, Field field) throws ValidateRangeException {
+		Range att = fieldData.getRangeAnnotation(field);
 		if (ObjectUtils.isNotInRange(value, att.min(), att.max())) {
-			String message = MessageBuilder.of(field, att.value())
+			String message = MessageBuilder.of(fieldData)
 					.min(att.min()).max(att.max())
 					.build(MessageTemplate.RANGE);
-			throw new ValidateRangeException(field, att.value(), value, message,
-					att.min(), att.max());
+			throw new ValidateRangeException(fieldData.getField(), fieldData.getName(),
+					value, message, att.min(), att.max());
 		}
 	}
 
@@ -199,19 +184,19 @@ public class Validator {
 	 * 校验数值不在范围内
 	 *
 	 * @param value 字段值
+	 * @param fieldData  字段数据
 	 * @param field 字段
 	 * @throws ValidateNotRangeException 校验{@link NotRange}失败
 	 */
 	private static void validateNotRange(
-			Object value, Field field) throws ValidateNotRangeException {
-		NotRange att = field.getAnnotation(NotRange.class);
-		if (att == null) return;
+			Object value, FieldData fieldData, Field field) throws ValidateNotRangeException {
+		NotRange att = fieldData.getNotRangeAnnotation(field);
 		if (ObjectUtils.isInRange(value, att.min(), att.max())) {
-			String message = MessageBuilder.of(field, att.value())
+			String message = MessageBuilder.of(fieldData)
 					.min(att.min()).max(att.max())
 					.build(MessageTemplate.NOT_RANGE);
-			throw new ValidateNotRangeException(field, att.value(), value, message,
-					att.min(), att.max());
+			throw new ValidateNotRangeException(fieldData.getField(), fieldData.getName(),
+					value, message, att.min(), att.max());
 		}
 	}
 
