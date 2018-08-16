@@ -1,0 +1,4 @@
+rootProject.name = 'main'
+include 'validator'
+include 'sample'
+
