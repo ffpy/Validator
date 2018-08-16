@@ -58,7 +58,7 @@ public class Validator {
 	 * @throws ValidateException 校验失败
 	 */
 	public static void validate(Object bean) throws ValidateException {
-		FieldUtils.listWithValidateAnnotationFields(bean, (value, field) -> {
+		FieldUtils.listFields(bean, (value, field) -> {
 			FieldData fieldData = FileDataManager.getFieldData(field);
 			if (fieldData == null || !fieldData.hasValidateAnnotations()) return;
 

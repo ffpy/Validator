@@ -15,14 +15,14 @@ class FieldUtils {
 	/**
 	 * 获取指定对象的所有带校验注解的字段。
 	 *
-	 * @param obj                                   处理的对象
-	 * @param onListValidateAnnotationFieldListener 获取字段的回调接口
+	 * @param obj                 处理的对象
+	 * @param onListFieldListener 获取字段的回调接口
 	 * @throws ValidateException 校验失败或出错
 	 */
-	public static void listWithValidateAnnotationFields(
-			Object obj, OnListValidateAnnotationFieldListener onListValidateAnnotationFieldListener) throws ValidateException {
+	public static void listFields(
+			Object obj, OnListFieldListener onListFieldListener) throws ValidateException {
 		Objects.requireNonNull(obj);
-		Objects.requireNonNull(onListValidateAnnotationFieldListener);
+		Objects.requireNonNull(onListFieldListener);
 
 		// 获取对象的所有带校验注解的字段
 		Class<?> cls = obj.getClass();
@@ -33,7 +33,7 @@ class FieldUtils {
 			if (!field.isAccessible()) field.setAccessible(true);
 			try {
 				// 回调处理
-				onListValidateAnnotationFieldListener.forEach(field.get(obj), field);
+				onListFieldListener.forEach(field.get(obj), field);
 			} catch (IllegalAccessException e) {
 				throw new RuntimeException(e);
 			}
@@ -47,7 +47,7 @@ class FieldUtils {
 	/**
 	 * 遍历带校验注解的字段的回调接口
 	 */
-	interface OnListValidateAnnotationFieldListener {
+	interface OnListFieldListener {
 		/**
 		 * 回调函数。
 		 *
