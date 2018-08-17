@@ -1,36 +1,34 @@
 package org.ffpy.validator;
 
-import org.ffpy.validator.annotation.Match;
-import org.ffpy.validator.annotation.NotMatch;
-import org.ffpy.validator.exception.ValidateException;
+import org.ffpy.validator.anno.validate.Match;
+import org.ffpy.validator.anno.validate.NotMatch;
+import org.ffpy.validator.exception.ValidateFailException;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ValidatorMatchTest {
 
     @Test
-    public void testMatch() throws ValidateException {
+    public void testMatch() throws ValidateFailException {
         Bean1 bean = new Bean1("123");
-        Validator.validate(bean);
+        Validator.validateThrow(bean);
     }
 
-    @Test(expected = ValidateException.class)
-    public void testMatchWithException() throws ValidateException {
+    @Test(expected = ValidateFailException.class)
+    public void testMatchWithException() throws ValidateFailException {
         Bean1 bean = new Bean1("abc");
-        Validator.validate(bean);
+        Validator.validateThrow(bean);
     }
 
     @Test
-    public void testNotMatch() throws ValidateException {
+    public void testNotMatch() throws ValidateFailException {
         Bean2 bean = new Bean2("abc");
-        Validator.validate(bean);
+        Validator.validateThrow(bean);
     }
 
-    @Test(expected = ValidateException.class)
-    public void testNotMatchWithException() throws ValidateException {
+    @Test(expected = ValidateFailException.class)
+    public void testNotMatchWithException() throws ValidateFailException {
         Bean2 bean = new Bean2("123");
-        Validator.validate(bean);
+        Validator.validateThrow(bean);
     }
 
     private class Bean1 {

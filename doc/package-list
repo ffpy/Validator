@@ -1,5 +1,9 @@
 org.ffpy.validator
-org.ffpy.validator.annotation
-org.ffpy.validator.constant
+org.ffpy.validator.anno
+org.ffpy.validator.anno.validate
 org.ffpy.validator.exception
-org.ffpy.validator.manager
+org.ffpy.validator.field
+org.ffpy.validator.message
+org.ffpy.validator.message.template
+org.ffpy.validator.process
+org.ffpy.validator.utils

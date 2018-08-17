@@ -1,10 +1,8 @@
 package org.ffpy.validator;
 
-import org.ffpy.validator.annotation.NotNull;
-import org.ffpy.validator.annotation.Null;
-import org.ffpy.validator.exception.ValidateException;
-import org.ffpy.validator.exception.ValidateNotNullException;
-import org.ffpy.validator.exception.ValidateNullException;
+import org.ffpy.validator.anno.validate.NotNull;
+import org.ffpy.validator.anno.validate.Null;
+import org.ffpy.validator.exception.ValidateFailException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,49 +10,47 @@ import static org.junit.Assert.*;
 public class ValidatorNullTest {
 
     @Test
-    public void testNull() throws ValidateException {
+    public void testNull() throws ValidateFailException {
         Bean1 bean = new Bean1();
-        Validator.validate(bean);
+        Validator.validateThrow(bean);
     }
 
     @Test
     public void testNullWithException() {
-        ValidateException expectedException = null;
+        ValidateFailException expectedException = null;
         try {
             Bean1 bean = new Bean1();
             bean.setField(new Object());
-            Validator.validate(bean);
-        } catch (ValidateException e) {
+            Validator.validateThrow(bean);
+        } catch (ValidateFailException e) {
             expectedException = e;
         }
         assertNotNull(expectedException);
-        assertEquals(expectedException.getClass(), ValidateNullException.class);
-        assertEquals("field", expectedException.getField());
-        assertEquals("myField", expectedException.getName());
-        assertEquals("myField必须为Null", expectedException.getMessage());
+        assertEquals("field", expectedException.getFieldData().getField());
+        assertEquals("myField", expectedException.getFieldData().getName());
+        assertEquals("myField必须为null", expectedException.getMessage());
     }
 
     @Test
-    public void testNotNull() throws ValidateException {
+    public void testNotNull() throws ValidateFailException {
         Bean2 bean = new Bean2();
         bean.setField(new Object());
-        Validator.validate(bean);
+        Validator.validateThrow(bean);
     }
 
     @Test
     public void testNotNullWithException() {
-        ValidateException expectedException = null;
+        ValidateFailException expectedException = null;
         try {
             Bean2 bean = new Bean2();
-            Validator.validate(bean);
-        } catch (ValidateException e) {
+            Validator.validateThrow(bean);
+        } catch (ValidateFailException e) {
             expectedException = e;
         }
         assertNotNull(expectedException);
-        assertEquals(expectedException.getClass(), ValidateNotNullException.class);
-        assertEquals("field", expectedException.getField());
-        assertEquals("myField", expectedException.getName());
-        assertEquals("myField不能为Null", expectedException.getMessage());
+        assertEquals("field", expectedException.getFieldData().getField());
+        assertEquals("myField", expectedException.getFieldData().getName());
+        assertEquals("myField不能为null", expectedException.getMessage());
     }
 
     private class Bean1 {

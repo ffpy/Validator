@@ -1,7 +1,7 @@
 package org.ffpy.validator;
 
-import org.ffpy.validator.annotation.NotRange;
-import org.ffpy.validator.exception.ValidateException;
+import org.ffpy.validator.anno.validate.NotRange;
+import org.ffpy.validator.exception.ValidateFailException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 public class ValidatorPerformanceTest {
 
     @Test
-    public void test() throws ValidateException {
+    public void test() throws ValidateFailException {
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
             Bean bean = new Bean();
-            Validator.validate(bean);
+            Validator.validateThrow(bean);
         }
         long endTime = System.currentTimeMillis();
         System.out.println("用时：" + (endTime - startTime) + "ms");

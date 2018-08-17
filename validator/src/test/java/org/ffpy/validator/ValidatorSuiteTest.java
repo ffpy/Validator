@@ -8,6 +8,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ValidatorNullTest.class, ValidatorEmptyTest.class,
-		ValidatorMatchTest.class, ValidatorRangeTest.class, ValidatorThreadTest.class})
+		ValidatorMatchTest.class, ValidatorRangeTest.class})
 public class ValidatorSuiteTest {
 }

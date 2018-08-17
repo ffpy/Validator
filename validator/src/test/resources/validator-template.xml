@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="validator-template.xsd">
+    <template id="null">${name}必须为null</template>
+    <template id="not_null">${name}不能为null</template>
+    <template id="empty">${name}必须为空</template>
+    <template id="not_empty">${name}不能为空</template>
+    <template id="match">${name}必须匹配${pattern}</template>
+    <template id="not_match">${name}不能匹配${pattern}</template>
+    <template id="range">${name}必须在[${min},${max}]范围之内</template>
+    <template id="not_range">${name}必须在[${min},${max}]范围之外</template>
+</templates>

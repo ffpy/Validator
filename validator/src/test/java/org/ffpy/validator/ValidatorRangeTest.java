@@ -1,8 +1,8 @@
 package org.ffpy.validator;
 
-import org.ffpy.validator.annotation.NotRange;
-import org.ffpy.validator.annotation.Range;
-import org.ffpy.validator.exception.ValidateException;
+import org.ffpy.validator.anno.validate.NotRange;
+import org.ffpy.validator.anno.validate.Range;
+import org.ffpy.validator.exception.ValidateFailException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,43 +10,43 @@ import static org.junit.Assert.*;
 public class ValidatorRangeTest {
 
     @Test
-    public void testRange() throws ValidateException {
-        Validator.validate(new Bean1_1(2));
-        Validator.validate(new Bean1_2(2));
-        Validator.validate(new Bean1_3(2));
-        Validator.validate(new Bean1_4(2));
+    public void testRange() throws ValidateFailException {
+        Validator.validateThrow(new Bean1_1(2));
+        Validator.validateThrow(new Bean1_2(2));
+        Validator.validateThrow(new Bean1_3(2));
+        Validator.validateThrow(new Bean1_4(2));
     }
 
-    @Test(expected = ValidateException.class)
-    public void testRangeWithException() throws ValidateException {
-        Validator.validate(new Bean1_1(0));
-        Validator.validate(new Bean1_1(11));
-        Validator.validate(new Bean1_2(0));
-        Validator.validate(new Bean1_2(11));
-        Validator.validate(new Bean1_3(0));
-        Validator.validate(new Bean1_3(11));
-        Validator.validate(new Bean1_4(0));
-        Validator.validate(new Bean1_4(11));
+    @Test(expected = ValidateFailException.class)
+    public void testRangeWithException() throws ValidateFailException {
+        Validator.validateThrow(new Bean1_1(0));
+        Validator.validateThrow(new Bean1_1(11));
+        Validator.validateThrow(new Bean1_2(0));
+        Validator.validateThrow(new Bean1_2(11));
+        Validator.validateThrow(new Bean1_3(0));
+        Validator.validateThrow(new Bean1_3(11));
+        Validator.validateThrow(new Bean1_4(0));
+        Validator.validateThrow(new Bean1_4(11));
     }
 
     @Test
-    public void testNotRange() throws ValidateException {
-        Validator.validate(new Bean2_1(0));
-        Validator.validate(new Bean2_1(11));
-        Validator.validate(new Bean2_2(0));
-        Validator.validate(new Bean2_2(11));
-        Validator.validate(new Bean2_3(0));
-        Validator.validate(new Bean2_3(11));
-        Validator.validate(new Bean2_4(0));
-        Validator.validate(new Bean2_4(11));
+    public void testNotRange() throws ValidateFailException {
+        Validator.validateThrow(new Bean2_1(0));
+        Validator.validateThrow(new Bean2_1(11));
+        Validator.validateThrow(new Bean2_2(0));
+        Validator.validateThrow(new Bean2_2(11));
+        Validator.validateThrow(new Bean2_3(0));
+        Validator.validateThrow(new Bean2_3(11));
+        Validator.validateThrow(new Bean2_4(0));
+        Validator.validateThrow(new Bean2_4(11));
     }
 
-    @Test(expected = ValidateException.class)
-    public void testNotRangeWithException() throws ValidateException {
-        Validator.validate(new Bean2_1(2));
-        Validator.validate(new Bean2_2(2));
-        Validator.validate(new Bean2_3(2));
-        Validator.validate(new Bean2_4(2));
+    @Test(expected = ValidateFailException.class)
+    public void testNotRangeWithException() throws ValidateFailException {
+        Validator.validateThrow(new Bean2_1(2));
+        Validator.validateThrow(new Bean2_2(2));
+        Validator.validateThrow(new Bean2_3(2));
+        Validator.validateThrow(new Bean2_4(2));
     }
 
     private class Bean1_1 {

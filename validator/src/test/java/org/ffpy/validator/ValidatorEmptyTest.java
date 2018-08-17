@@ -1,8 +1,8 @@
 package org.ffpy.validator;
 
-import org.ffpy.validator.annotation.Empty;
-import org.ffpy.validator.annotation.NotEmpty;
-import org.ffpy.validator.exception.ValidateException;
+import org.ffpy.validator.anno.validate.Empty;
+import org.ffpy.validator.anno.validate.NotEmpty;
+import org.ffpy.validator.exception.ValidateFailException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,16 +15,16 @@ import static org.junit.Assert.*;
 public class ValidatorEmptyTest {
 
     @Test
-    public void testEmpty() throws ValidateException {
-        Validator.validate(new Bean1_1());
-        Validator.validate(new Bean1_2());
-        Validator.validate(new Bean1_3());
-        Validator.validate(new Bean1_4());
-        Validator.validate(new Bean1_5());
+    public void testEmpty() throws ValidateFailException {
+        Validator.validateThrow(new Bean1_1());
+        Validator.validateThrow(new Bean1_2());
+        Validator.validateThrow(new Bean1_3());
+        Validator.validateThrow(new Bean1_4());
+        Validator.validateThrow(new Bean1_5());
     }
 
-    @Test(expected = ValidateException.class)
-    public void testEmptyWithException() throws ValidateException {
+    @Test(expected = ValidateFailException.class)
+    public void testEmptyWithException() throws ValidateFailException {
         Bean1_1 bean1 = new Bean1_1();
         Bean1_2 bean2 = new Bean1_2();
         Bean1_3 bean3 = new Bean1_3();
@@ -39,15 +39,15 @@ public class ValidatorEmptyTest {
         bean4.field.put("1", "a");
         bean5.field = new Object();
 
-        Validator.validate(bean1);
-        Validator.validate(bean2);
-        Validator.validate(bean3);
-        Validator.validate(bean4);
-        Validator.validate(bean5);
+        Validator.validateThrow(bean1);
+        Validator.validateThrow(bean2);
+        Validator.validateThrow(bean3);
+        Validator.validateThrow(bean4);
+        Validator.validateThrow(bean5);
     }
 
     @Test
-    public void testNotEmpty() throws ValidateException {
+    public void testNotEmpty() throws ValidateFailException {
         Bean2_1 bean1 = new Bean2_1();
         Bean2_2 bean2 = new Bean2_2();
         Bean2_3 bean3 = new Bean2_3();
@@ -62,20 +62,20 @@ public class ValidatorEmptyTest {
         bean4.field.put("1", "a");
         bean5.field = new Object();
 
-        Validator.validate(bean1);
-        Validator.validate(bean2);
-        Validator.validate(bean3);
-        Validator.validate(bean4);
-        Validator.validate(bean5);
+        Validator.validateThrow(bean1);
+        Validator.validateThrow(bean2);
+        Validator.validateThrow(bean3);
+        Validator.validateThrow(bean4);
+        Validator.validateThrow(bean5);
     }
 
-    @Test(expected = ValidateException.class)
-    public void testNotEmptyWithException() throws ValidateException {
-        Validator.validate(new Bean2_1());
-        Validator.validate(new Bean2_2());
-        Validator.validate(new Bean2_3());
-        Validator.validate(new Bean2_4());
-        Validator.validate(new Bean2_5());
+    @Test(expected = ValidateFailException.class)
+    public void testNotEmptyWithException() throws ValidateFailException {
+        Validator.validateThrow(new Bean2_1());
+        Validator.validateThrow(new Bean2_2());
+        Validator.validateThrow(new Bean2_3());
+        Validator.validateThrow(new Bean2_4());
+        Validator.validateThrow(new Bean2_5());
     }
 
     private class Bean1_1 {

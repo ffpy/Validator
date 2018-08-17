@@ -1,6 +1,6 @@
 package org.ffpy.validator;
 
-import org.ffpy.validator.exception.ValidateException;
+import org.ffpy.validator.exception.ValidateFailException;
 import org.junit.Test;
 
 /**
@@ -19,10 +19,10 @@ public class ValidatorThreadTest {
                         for (int k = 0; k < 10; k++) {
                             Class cls = Class.forName("org.ffpy.validator.bean.Bean" + k);
                             Object obj = cls.newInstance();
-                            Validator.validate(obj);
+                            Validator.validateThrow(obj);
                         }
                     }
-                } catch (ValidateException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                } catch (ValidateFailException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
             });

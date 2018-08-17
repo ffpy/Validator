@@ -1,6 +1,6 @@
 package org.ffpy.validator.bean;
 
-import org.ffpy.validator.annotation.NotRange;
+import org.ffpy.validator.anno.validate.NotRange;
 
 public class Bean1 {
     @NotRange(value = "myField0", min = 1, max = 10)
