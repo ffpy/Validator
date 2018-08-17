@@ -17,12 +17,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 校验器
+ * 校验器。
  */
 public class Validator {
-	/**
-	 * 校验注解和处理器的映射
-	 */
+	/** 校验注解和处理器的映射 */
 	private static final Map<Class<? extends Annotation>, ValidateProcess> handleMapping =
 			new ConcurrentHashMap<>();
 
@@ -33,7 +31,7 @@ public class Validator {
 	}
 
 	/**
-	 * 注册内置注解
+	 * 注册内置注解。
 	 */
 	private static void registerDefaultAnno() {
 		register(Null.class, new ValidateNullProcess());
@@ -47,7 +45,7 @@ public class Validator {
 	}
 
 	/**
-	 * 设置内置注解的别名
+	 * 设置内置注解的别名。
 	 */
 	private static void aliasDefaultAnno() {
 		alias(Null.class, Null2.class);
